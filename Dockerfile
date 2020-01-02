@@ -56,6 +56,7 @@ ENV OPENVPN_USERNAME=**None** \
     PGID= \
     DROP_DEFAULT_ROUTE= \
     WEBPROXY_ENABLED=false \
+    D_TEST= \
     WEBPROXY_PORT=8888
 
 VOLUME ["/data"]
