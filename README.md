@@ -170,6 +170,7 @@ You may set the following parameters to customize the user id that runs transmis
 |----------|----------|-------|
 |`PUID` | Sets the user id who will run transmission | `PUID=1003`|
 |`PGID` | Sets the group id for the transmission user | `PGID=1003` |
+|`DISABLE_DATA_OWNERSHIP_CHANGE` | If set, the default ownership/permission changes applied to the rest of the torrent app's data will not be applied to the data directory.  Only use this if you know what you are doing. | `DISABLE_DATA_OWNERSHIP_CHANGE=1` |
 
 ### Dropping default route from iptables (advanced)
 

@@ -49,6 +49,7 @@ ENV OPENVPN_USERNAME=**None** \
     DELUGE_HOME=/config \
     DELUGE_RPC_PORT=9091 \
     ENABLE_UFW=false \
+    DISABLE_DATA_OWNERSHIP_CHANGE= \
     UFW_ALLOW_GW_NET=false \
     UFW_EXTRA_PORTS= \
     PUID= \

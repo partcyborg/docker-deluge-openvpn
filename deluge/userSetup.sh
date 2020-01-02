@@ -9,19 +9,31 @@ if [ -n "$PUID" ] && [ ! "$(id -u root)" -eq "$PUID" ]; then
     if [ ! "$(id -u ${RUN_AS})" -eq "$PUID" ]; then usermod -o -u "$PUID" ${RUN_AS} ; fi
     if [ ! "$(id -g ${RUN_AS})" -eq "$PGID" ]; then groupmod -o -g "$PGID" ${RUN_AS} ; fi
 
-    echo "Setting owner for deluge paths to ${PUID}:${PGID}"
+    if [ -n "$DISABLE_DATA_OWNERSHIP_CHANGE" ]; then
+       echo "Ownership change for /data disabled"
+    else
+       echo "Setting ownership to ${PUID}:${PGID} and correct file/directory permissions for /data"
+       chown -R ${RUN_AS}:${RUN_AS} /data 
+    fi
+
+    echo "Setting owner for other deluge paths to ${PUID}:${PGID}"
     chown -R ${RUN_AS}:${RUN_AS} \
         /config \
-        /data \
         ${DELUGE_HOME} \
         ${DELUGE_DOWNLOAD_DIR} \
         ${DELUGE_INCOMPLETE_DIR} \
         ${DELUGE_WATCH_DIR}
-        
-    echo "Setting permission for files (644) and directories (755)"
+    
+    if [ -n "$DISABLE_DATA_OWNERSHIP_CHANGE" ]; then
+       echo "Permission change for /data disabled"
+    else
+       echo "Setting permission for files (644) and directories (755) in /data"
+       chmod -R go=rX,u=rwX /data
+    fi
+
+    echo "Setting permission for files (644) and directories (755) in other deluge paths"
     chmod -R go=rX,u=rwX \
         /config \
-        /data \
         ${DELUGE_HOME} \
         ${DELUGE_DOWNLOAD_DIR} \
         ${DELUGE_INCOMPLETE_DIR} \
