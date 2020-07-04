@@ -3,8 +3,6 @@
 # More/less taken from https://github.com/linuxserver/docker-baseimage-alpine/blob/3eb7146a55b7bff547905e0d3f71a26036448ae6/root/etc/cont-init.d/10-adduser
 
 RUN_AS=root
-echo "DEBUG: DISABLE: $DISABLE_DATA_OWNERSHIP_CHANGE"
-echo "DEBUG: D_TEST: $D_TEST"
 
 if [ -n "$PUID" ] && [ ! "$(id -u root)" -eq "$PUID" ]; then
     RUN_AS=abc
